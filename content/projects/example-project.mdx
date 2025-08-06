@@ -1,0 +1,110 @@
+export const metadata = {
+    // --- Required Fields --- //
+    title: 'Luna E-commerce Platform',
+    publishedDate: '2024-06-15',
+
+    // --- Optional Fields --- //
+    mainImage: 'https://placehold.co/600x400/EEE/31343C',
+    tags: ['React', 'Node.js', 'E-commerce', 'Stripe API'],
+
+    // --- Case Study Details --- //
+    caseStudy: {
+        myRole: 'Lead Full-Stack Developer',
+        client: 'Luna Boutique',
+        clientUrl: 'https://example.com'
+    },
+
+    // --- Project Details --- //
+    timeLine: '3 months (March 2024 - June 2024)',
+    technologies: ['React.js', 'Express.js', 'PostgreSQL', 'Stripe API', 'Figma', 'Vercel'],
+    repository: 'https://github.com',
+    liveUrl: 'https://example.com'
+
+}
+
+# Case Study: Luna E-commerce Platform
+
+Luna Boutique, a growing fashion retailer, needed to replace its outdated and slow online store with a modern, scalable, and visually appealing e-commerce platform. The primary goal was to enhance the user experience, streamline the checkout process, and provide an easy-to-use dashboard for managing products and orders.
+
+As the Lead Full-Stack Developer, I was responsible for the end-to-end development of this new platform, from initial architecture to final deployment.
+
+## The Challenge
+
+The client's existing platform suffered from several critical issues:
+
+- **Poor Performance:** Page load times were exceedingly high, leading to a high bounce rate.
+- **Outdated Design:** The user interface was not mobile-responsive and looked dated, affecting brand perception.
+- **Insecure Payments:** The previous payment system was not PCI compliant and offered a poor user experience.
+- **Difficult Content Management:** The admin panel was clunky and required technical knowledge to update products.
+
+## The Solution: A Modern E-commerce Experience
+
+We built a custom, full-stack e-commerce solution from the ground up using a modern technology stack. The new platform is fast, secure, fully responsive, and provides a seamless shopping experience for customers and an intuitive management system for the Luna team.
+
+> "The new website has completely transformed our online business. Sales are up 40% in the first month alone, and our customers love the new design and easy checkout process!"
+>
+> – Jane Doe, CEO of Luna Boutique
+
+### Key Features Implemented
+
+- **Secure Payment Processing:** Full integration with the Stripe API for secure, reliable, and multi-option payments (Credit Card, Apple Pay, Google Pay).
+- **Responsive Frontend:** A pixel-perfect, mobile-first interface built with React.js ensures a flawless experience on any device.
+- **Custom Admin Dashboard:** A secure and intuitive dashboard for the Luna team to manage products, view orders, and track sales analytics.
+- **Optimized Performance:** The site achieves a Lighthouse performance score of over 95, thanks to server-side rendering and modern build tools.
+
+## Technical Deep Dive
+
+The architecture was designed to be modular and scalable.
+
+### Backend (Node.js & Express)
+
+The backend is a RESTful API built with Express.js, handling all business logic, database interactions, and communication with the Stripe API. We used PostgreSQL for our relational database due to its reliability and robust feature set.
+
+Here's a simplified example of an API endpoint to fetch all products:
+
+```javascript
+// src/routes/products.js
+import express from "express";
+import { Product } from "../models";
+
+const router = express.Router();
+
+router.get("/", async (req, res) => {
+  try {
+    // Fetch all products, ordered by creation date
+    const products = await Product.findAll({ order: [["createdAt", "DESC"]] });
+    res.json(products);
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+export default router;
+```
+
+### Frontend (React.js)
+
+The frontend was built as a Single Page Application (SPA) using React. We adopted a component-based architecture, which made the UI code maintainable and reusable.
+
+A basic `ProductCard` component might look like this:
+
+```jsx
+// src/components/ProductCard.jsx
+import React from "react";
+
+const ProductCard = ({ product }) => {
+  return (
+    <div className="card">
+      <img src={product.imageUrl} alt={product.name} className="card-image" />
+      <div className="card-content">
+        <h3 className="card-title">{product.name}</h3>
+        <p className="card-price">${product.price.toFixed(2)}</p>
+        <button className="card-button">Add to Cart</button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
+```
