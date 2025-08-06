@@ -261,7 +261,7 @@ export function SocialLinkIcon({ link }: SocialLinkIconProps) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center p-2 rounded-lg  hover:bg-secondary transition-colors"
+            className="inline-flex items-center justify-center p-2 rounded-lg hover:bg-muted dark:hover:bg-secondary transition-colors"
           >
             <IconComponent
               className={cn(

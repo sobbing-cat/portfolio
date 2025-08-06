@@ -52,15 +52,9 @@ export function ExternalLinkInterceptor() {
   }, []);
 
   const handleConfirm = () => {
-    setShowConfirm(false);
     if (targetHref) {
       window.open(targetHref, '_blank');
     }
-  };
-
-  const handleCancel = () => {
-    setShowConfirm(false);
-    setTargetHref("")
   };
 
   if (!portalMounted) {
@@ -76,13 +70,13 @@ export function ExternalLinkInterceptor() {
         </AlertDialogHeader>
         <AlertDialogDescription className="text-muted-foreground text-base mb-6">
           You are about to navigate to an external page.
-          <div className="bg-muted p-3 rounded-md border border-border mt-4 break-all text-sm font-mono text-foreground">
+          <span className="bg-muted block p-3 rounded-md border border-border mt-4 break-all text-sm font-mono text-foreground">
             {targetHref}
-          </div>
+          </span>
         </AlertDialogDescription>
         <AlertDialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-4">
           <AlertDialogCancel className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/80">Cancel</AlertDialogCancel>
-          <AlertDialogAction className="w-full sm:w-auto bg-primary dark:bg-foreground text-primary-foreground dark:text-primary hover:bg-primary/90">Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleConfirm} className="w-full sm:w-auto bg-primary dark:bg-foreground text-primary-foreground dark:text-primary hover:bg-primary/90">Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>,
