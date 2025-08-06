@@ -102,13 +102,13 @@ export default function Header() {
   return (
     <header
       className={`
-      bg-background h-18 fixed left-0 right-0 z-50 mx-auto max-w-6xl rounded-b-[8px] top-0
+      h-18 fixed left-0 right-0 z-20 mx-auto max-w-6xl rounded-b-[8px] top-0
       transition-transform duration-300 ease-in-out
       ${isVisible ? "translate-y-0" : "-translate-y-full"}
     `}
     >
       <div
-        className={`bg-muted dark:bg-secondary rounded-[8px] border border-border h-14 mt-4 p-2 flex justify-between items-center gap-4 transition-all duration-300 ease-in-out shadow-sm ${
+        className={`bg-muted dark:bg-secondary rounded-[8px] z-50 border border-border h-14 mt-4 p-2 flex justify-between items-center gap-4 transition-all duration-300 ease-in-out shadow-sm ${
           menuOpen ? "rounded-br-[0px]" : ""
         } ${showScrollToTop ? "rounded-bl-[0px]" : ""}`}
       >

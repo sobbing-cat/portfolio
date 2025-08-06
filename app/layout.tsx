@@ -9,7 +9,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ExternalLinkInterceptor } from "@/providers/external-link-interceptor";
 
 const hankedGrotesk = Hanken_Grotesk({
-  variable: "--font-geist-sans",
+  variable: "--font-hanken-grotesk",
   subsets: ["latin"],
 });
 
