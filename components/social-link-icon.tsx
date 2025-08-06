@@ -24,11 +24,10 @@ import {
   IconBrandDiscordFilled as Discord,
   IconBrandTwitch as Twitch,
   IconBrandMastodon as Mastodon,
-  IconGlobeFilled as Globe,
+  IconWorld as Globe,
   IconQuestionMark as QuestionMark,
   IconBrandXFilled as XCircle,
   IconBrandBluesky as Feather,
-
 } from "@tabler/icons-react";
 
 interface SocialLinkIconProps {
@@ -255,40 +254,38 @@ export function SocialLinkIcon({ link }: SocialLinkIconProps) {
   const IconComponent = Icon;
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          {isLink ? (
-            <Link
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center p-2 rounded-lg  hover:bg-secondary transition-colors"
-            >
-              <IconComponent
-                className={cn(
-                  "h-6 w-6",
-                  isError && "text-red-500",
-                  Icon === QuestionMark && "text-blue-500"
-                )}
-              />
-            </Link>
-          ) : (
-            <div className="inline-flex items-center justify-center p-2 rounded-full">
-              <IconComponent
-                className={cn(
-                  "h-6 w-6",
-                  isError && "text-red-500",
-                  Icon === QuestionMark && "text-blue-500"
-                )}
-              />
-            </div>
-          )}
-        </TooltipTrigger>
-        <TooltipContent className="text-white font-semibold">
-          {tooltipText}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip delayDuration={400}>
+      <TooltipTrigger asChild>
+        {isLink ? (
+          <Link
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center p-2 rounded-lg  hover:bg-secondary transition-colors"
+          >
+            <IconComponent
+              className={cn(
+                "h-6 w-6",
+                isError && "text-red-500",
+                Icon === QuestionMark && "text-blue-500"
+              )}
+            />
+          </Link>
+        ) : (
+          <div className="inline-flex items-center justify-center p-2 rounded-full">
+            <IconComponent
+              className={cn(
+                "h-6 w-6",
+                isError && "text-red-500",
+                Icon === QuestionMark && "text-blue-500"
+              )}
+            />
+          </div>
+        )}
+      </TooltipTrigger>
+      {/* <TooltipContent className="text-white font-semibold">
+        {tooltipText}
+      </TooltipContent> */}
+    </Tooltip>
   );
 }

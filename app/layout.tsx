@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import NProgressProvider from "@/providers/nprogress";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { ExternalLinkInterceptor } from "@/providers/external-link-interceptor";
 
 const hankedGrotesk = Hanken_Grotesk({
   variable: "--font-geist-sans",
@@ -27,16 +29,19 @@ export default function RootLayout({
         className={`${hankedGrotesk.variable} flex flex-col min-h-screen antialiased`}
       >
         <NProgressProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </ThemeProvider>
+          <TooltipProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+              <ExternalLinkInterceptor />
+            </ThemeProvider>
+          </TooltipProvider>
         </NProgressProvider>
       </body>
     </html>
