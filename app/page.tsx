@@ -1,6 +1,8 @@
+"use client";
+
 export default function Home() {
   return (
-    <div className="max-w-6xl mx-auto pt-24 pb-8 flex flex-col gap-8">
+    <div className="max-w-6xl mx-auto pt-24 pb-8 flex flex-col gap-8 px-4 sm:px-6 lg:px-8">
       <div className="w-full min-h-100 bg-muted/30 rounded-[8px] border border-border relative flex flex-col">
         <div className="absolute top-0 left-0 border-l-2 border-t-2 w-10 h-10 rounded-tl-[8px] border-foreground/80" />
         <div className="absolute top-0 right-0 border-r-2 border-t-2 w-10 h-10 rounded-tr-[8px] border-foreground/80" />

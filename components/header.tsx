@@ -58,7 +58,6 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY && window.scrollY > 100) {
@@ -109,7 +108,7 @@ export default function Header() {
     `}
     >
       <div
-        className={`bg-muted rounded-[8px] border border-border h-14 mt-4 p-2 flex justify-between items-center gap-4 transition-all duration-300 ease-in-out ${
+        className={`bg-muted dark:bg-secondary rounded-[8px] border border-border h-14 mt-4 p-2 flex justify-between items-center gap-4 transition-all duration-300 ease-in-out shadow-sm ${
           menuOpen ? "rounded-br-[0px]" : ""
         } ${showScrollToTop ? "rounded-bl-[0px]" : ""}`}
       >
@@ -195,11 +194,8 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="icon" onClick={toggleTheme}>
-            {theme === "light" ? (
-              <Sun className="h-[1.4rem] w-[1.4rem]" />
-            ) : (
-              <Moon className="h-[1.4rem] w-[1.4rem]" />
-            )}
+            <Sun className="h-[1.4rem] w-[1.4rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+            <Moon className="absolute h-[1.4rem] w-[1.4rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
             <span className="sr-only">Toggle theme</span>
           </Button>
           <Button
@@ -214,20 +210,26 @@ export default function Header() {
       </div>
       <div className="flex justify-between h-10 relative -z-50">
         <div
-          className={`absolute left-0 h-full w-fit bg-muted rounded-[8px] transition-all duration-300 ease-in-out border-b border-x border-border flex items-center justify-center ${
+          className={`absolute left-0 h-full w-fit bg-muted dark:bg-secondary rounded-[8px] transition-all duration-300 ease-in-out border-b border-x border-border flex items-center justify-center ${
             showScrollToTop
-              ? "rounded-t-[0px] top-0"
+              ? "rounded-t-[0px] shadow-sm top-0"
               : "rounded-tr-[0px] -top-10"
           }`}
         >
-          <Button variant="ghost" className="gap-1 p-2 text-foreground" onClick={scrollToTop}>
+          <Button
+            variant="ghost"
+            className="gap-1 p-2 text-foreground"
+            onClick={scrollToTop}
+          >
             <ArrowUp className="h-5 w-5 mr-2" />
             Scroll to Top
           </Button>
         </div>
         <nav
-          className={`absolute right-0 h-full transition-all duration-300 ease-in-out w-fit bg-muted rounded-[8px] border-b border-x border-border flex items-center justify-center gap-1 p-2 ${
-            menuOpen ? "rounded-t-[0px] top-0" : "rounded-tl-[0px] -top-10"
+          className={`absolute right-0 h-full transition-all duration-300 ease-in-out w-fit bg-muted dark:bg-secondary rounded-[8px] border-b border-x border-border flex items-center justify-center gap-1 p-2 ${
+            menuOpen
+              ? "rounded-t-[0px] top-0 shadow-sm"
+              : "rounded-tl-[0px] -top-10"
           }`}
         >
           <Link href={"/"}>
