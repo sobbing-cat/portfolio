@@ -25,7 +25,6 @@ import {
   IconBrandMastodon as Mastodon,
   IconWorld as Globe,
   IconQuestionMark as QuestionMark,
-  IconBrandXFilled as XCircle,
   IconBrandBluesky as Feather,
   IconAlertTriangleFilled as Warn,
 } from "@tabler/icons-react";

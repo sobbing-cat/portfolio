@@ -75,9 +75,19 @@ export default function Footer({ info }: { info: any }) {
           <Link
             className="text-muted-foreground underline"
             target="_blank"
+            rel="noopener noreferrer"
             href={"https://github.com/sobbing-cat"}
           >
             Sobbing_Cat
+          </Link>
+          {" | "}
+          <Link
+            className="text-muted-foreground underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={"https://github.com/sobbing-cat/portfolio"}
+          >
+            Source
           </Link>
         </span>
       </div>
