@@ -67,8 +67,6 @@ export async function generateMetadata(
 
 export default async function BlogPost({
   params,
-}: {
-  params: { slug: string };
 }) {
   const { slug } = await params;
 
