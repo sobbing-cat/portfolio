@@ -24,7 +24,7 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
 
   let postMetadata: BlogPostMetadata;
   try {
