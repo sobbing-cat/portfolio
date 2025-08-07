@@ -6,7 +6,7 @@ import type { BlogPostMetadata } from "@/lib/types";
 import { notFound } from "next/navigation";
 import fs from "node:fs";
 import path from "node:path";
-import SiteData from "@/content/information.json"
+import SiteData from "@/content/information.json";
 
 // Define the expected structure of the MDX module
 interface MDXModule {
@@ -16,13 +16,13 @@ interface MDXModule {
 
 // generateMetadata function to dynamically set page metadata
 type Props = {
-  params: { slug: string };
+  params: any;
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
 
@@ -48,26 +48,24 @@ export async function generateMetadata(
     keywords: postMetadata.keywords,
     authors: [{ name: SiteData.author.name, url: SiteData.site.baseUrl }],
 
-  openGraph: {
-    title: postMetadata.title,
-    description: postMetadata.excerpt,
-    url: SiteData.site.baseUrl,
-    siteName: SiteData.site.title,
-    images: [
-      {
-        url: `${SiteData.site.baseUrl}${SiteData.metadata.openGraph.image}/blog?title=${postMetadata.title}&imageUrl=${postMetadata.mainImage}`,
-        alt: SiteData.metadata.openGraph.imageAlt,
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
+    openGraph: {
+      title: postMetadata.title,
+      description: postMetadata.excerpt,
+      url: SiteData.site.baseUrl,
+      siteName: SiteData.site.title,
+      images: [
+        {
+          url: `${SiteData.site.baseUrl}${SiteData.metadata.openGraph.image}/blog?title=${postMetadata.title}&imageUrl=${postMetadata.mainImage}`,
+          alt: SiteData.metadata.openGraph.imageAlt,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
   };
 }
 
-export default async function BlogPost({
-  params,
-}) {
+export default async function BlogPost({ params }: Props) {
   const { slug } = await params;
 
   let PostContent: React.ComponentType;
