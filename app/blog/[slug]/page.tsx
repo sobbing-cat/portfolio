@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import fs from "node:fs";
 import path from "node:path";
 import SiteData from "@/content/information.json";
+import { promises } from "node:dns";
 
 // Define the expected structure of the MDX module
 interface MDXModule {
@@ -16,8 +17,7 @@ interface MDXModule {
 
 // generateMetadata function to dynamically set page metadata
 type Props = {
-  params: any;
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata(
