@@ -1,19 +1,29 @@
 {
-  "metadata": {
-    "title": "Information",
-    "description": "This file contains information about the portfolio project.",
-    "keywords": ["portfolio", "information", "project details"],
-    "author": "Sobbing_Cat"
+  "site": {
+    "title": "Sobbing Cat",
+    "description": "Explore the portfolio of Sobbing Cat, showcasing a collection of projects and creative works.",
+    "baseUrl": "https://www.sobbingcat.com"
   },
-
-  "footer": {
-    "name": "Sobbing_Cat",
+  "author": {
+    "name": "Sobbing Cat",
+    "handle": "Sobbing_Cat",
     "description": "A creative developer focused on building beautiful and functional web experiences.",
-    "links": [
-      "https://www.sobbingcat.com/",
+    "image": {
+      "url": "https://github.com/sobbing-cat.png",
+      "alt": "A picture of Sobbing Cat"
+    },
+    "socialLinks": [
       "https://www.github.com/sobbing-cat",
       "https://www.twitch.tv/notsobbingcat",
       "https://www.youtube.com/@sobbing-cat"
     ]
+  },
+  "metadata": {
+    "keywords": ["portfolio", "web development", "design", "Sobbing Cat"],
+    "openGraph": {
+      "type": "website",
+      "image": "/api/og-image",
+      "imageAlt": "An overview of the Sobbing Cat portfolio."
+    }
   }
 }

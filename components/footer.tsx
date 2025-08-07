@@ -6,11 +6,10 @@ import { SocialLinkIcon } from "./social-link-icon";
 import { useState, useEffect, useRef } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function Footer({ info }: { info: any }) {
+export default function Footer({ SiteData }: { SiteData: any }) {
   const [isWrapped, setIsWrapped] = useState(false);
   const socialsContainerRef = useRef<HTMLDivElement>(null);
 
-  console.log(info);
 
   useEffect(() => {
     const checkWrap = () => {
@@ -47,7 +46,7 @@ export default function Footer({ info }: { info: any }) {
             ref={socialsContainerRef}
             className="flex flex-wrap h-full content-end gap-2 p-2 justify-end transition-all ease-in-out group-hover:bg-secondary rounded-lg group-hover:border dark:group-hover:bg-muted border-border group-hover:shadow-lg"
           >
-            {info.links.map((link: string, index: number) => (
+            {SiteData.author.socialLinks.map((link: string, index: number) => (
               <SocialLinkIcon key={index} link={link} />
             ))}
           </div>
@@ -55,14 +54,14 @@ export default function Footer({ info }: { info: any }) {
         <div className="flex flex-col md:flex-row justify-between items-start p-8 text-secondary-foreground h-full">
           <div className="flex flex-col justify-between h-full">
             <div>
-              <h3 className="text-2xl font-bold mb-2">{info.name}</h3>
+              <h3 className="text-2xl font-bold mb-2">{SiteData.author.name}</h3>
               <p className="text-muted-foreground max-w-xs">
-                {info.description}
+                {SiteData.author.description}
               </p>
             </div>
             <div>
               <p className="text-xs text-muted-foreground">
-                © {new Date().getFullYear()} {info.name}. All Rights Reserved.
+                © {new Date().getFullYear()} {SiteData.author.name}. All Rights Reserved.
               </p>
             </div>
           </div>
