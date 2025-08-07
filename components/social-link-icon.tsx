@@ -7,7 +7,6 @@ import Link from "next/link";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
@@ -26,8 +25,8 @@ import {
   IconBrandMastodon as Mastodon,
   IconWorld as Globe,
   IconQuestionMark as QuestionMark,
-  IconBrandXFilled as XCircle,
   IconBrandBluesky as Feather,
+  IconAlertTriangleFilled as Warn,
 } from "@tabler/icons-react";
 
 interface SocialLinkIconProps {
@@ -130,21 +129,35 @@ export function SocialLinkIcon({ link }: SocialLinkIconProps) {
         tooltipText: "No link provided (empty string)",
         isError: false,
         isLink: false,
-        href: "#", // Non-functional link
+        href: "#",
       };
     }
 
     let url: URL;
     try {
-      url = new URL(link);
       // Ensure protocol is specified and is http/https
-      if (!url.protocol.startsWith("http")) {
+      if (!link.startsWith("http://") && !link.startsWith("https://")) {
         throw new Error("Protocol not specified or invalid.");
       }
-    } catch (e) {
+
+      url = new URL(link);
+
+      // Validate for an actual TLD
+      const hostnameParts = url.hostname.split(".");
+      if (
+        hostnameParts.length < 2 ||
+        hostnameParts[hostnameParts.length - 1].length === 0
+      ) {
+        throw new Error(
+          "Hostname does not contain a valid Top-Level Domain (TLD)."
+        );
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       return {
-        Icon: Globe,
-        tooltipText: `Invalid URL format or protocol missing: ${link}`,
+        Icon: Warn,
+        tooltipText: `${error.message}`,
         isError: true,
         isLink: false,
         href: "#",
@@ -224,7 +237,7 @@ export function SocialLinkIcon({ link }: SocialLinkIconProps) {
       if (!isUserAccount) {
         // It's a social platform domain, but the path doesn't match a user/account pattern
         return {
-          Icon: XCircle,
+          Icon: detectedSocial.icon,
           tooltipText: `Not a specific account on ${detectedSocial.name}: ${link}`,
           isError: true,
           isLink: false,
@@ -254,7 +267,7 @@ export function SocialLinkIcon({ link }: SocialLinkIconProps) {
   const IconComponent = Icon;
 
   return (
-    <Tooltip delayDuration={400}>
+    <Tooltip delayDuration={isError ? 0 : 400}>
       <TooltipTrigger asChild>
         {isLink ? (
           <Link
@@ -283,9 +296,9 @@ export function SocialLinkIcon({ link }: SocialLinkIconProps) {
           </div>
         )}
       </TooltipTrigger>
-      {/* <TooltipContent className="text-white font-semibold">
+      <TooltipContent className="text-white font-semibold">
         {tooltipText}
-      </TooltipContent> */}
+      </TooltipContent>
     </Tooltip>
   );
 }

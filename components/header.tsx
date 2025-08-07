@@ -10,9 +10,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from "@/components/ui/command";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import {
@@ -22,13 +21,21 @@ import {
   IconSearch as Search,
   IconHomeFilled as Home,
   IconArrowUp as ArrowUp,
+  IconArrowBackUp as ArrowBackUp,
+  IconFolderSymlink as ProjectIcon,
+  IconFileText as BlogIcon,
 } from "@tabler/icons-react";
+import { XIcon } from "lucide-react";
 
 const projects = [
-  { id: "1", name: "E-commerce Platform", url: "/projects/ecommerce" },
-  { id: "2", name: "Portfolio Website", url: "/projects/portfolio" },
-  { id: "3", name: "Task Management App", url: "/projects/task-app" },
-  { id: "4", name: "AI Chatbot Integration", url: "/projects/ai-chatbot" },
+  { id: "1", title: "E-commerce Platform", url: "/projects/ecommerce" },
+  { id: "2", title: "Portfolio Website", url: "/projects/portfolio" },
+  { id: "3", title: "Task Management App", url: "/projects/task-app" },
+  { id: "4", title: "AI Chatbot Integration", url: "/projects/ai-chatbot" },
+  { id: "5", title: "Weather Dashboard", url: "/projects/weather-dashboard" },
+  { id: "6", title: "Recipe Finder", url: "/projects/recipe-finder" },
+  { id: "7", title: "Fitness Tracker", url: "/projects/fitness-tracker" },
+  { id: "8", title: "Personal Finance App", url: "/projects/personal-finance" },
 ];
 
 const blogPosts = [
@@ -44,6 +51,27 @@ const blogPosts = [
     url: "/blog/react-state-management",
   },
   { id: "4", title: "Deploying to Vercel", url: "/blog/deploying-vercel" },
+  {
+    id: "5",
+    title: "Building Accessible Web Apps",
+    url: "/blog/accessible-web-apps",
+  },
+  {
+    id: "6",
+    title: "Optimizing React Performance",
+    url: "/blog/react-performance",
+  },
+  {
+    id: "7",
+    title: "TypeScript Tips and Tricks",
+    url: "/blog/typescript-tips",
+  },
+  { id: "8", title: "Dark Mode in CSS", url: "/blog/dark-mode-css" },
+];
+
+const searchableItems = [
+  ...projects.map((p) => ({ ...p, type: "project" })),
+  ...blogPosts.map((b) => ({ ...b, type: "blog" })),
 ];
 
 export default function Header() {
@@ -57,6 +85,25 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [showFilterHint, setShowFilterHint] = useState(true);
+  const FILTER_HINT_STORAGE_KEY = "searchFilterHintClosed";
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hintClosed = localStorage.getItem(FILTER_HINT_STORAGE_KEY);
+      if (hintClosed === "true") {
+        setShowFilterHint(false);
+      }
+    }
+  }, []);
+
+  const handleCloseFilterHint = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(FILTER_HINT_STORAGE_KEY, "true");
+    }
+    setShowFilterHint(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,6 +146,10 @@ export default function Header() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const itemsMap = useMemo(() => {
+    return new Map(searchableItems.map((item) => [item.title, item]));
+  }, []);
+
   return (
     <header
       className={`
@@ -113,6 +164,10 @@ export default function Header() {
         } ${showScrollToTop ? "rounded-bl-[0px]" : ""}`}
       >
         <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" onClick={() => router.back()}>
+            <ArrowBackUp className="h-[1.4rem] w-[1.4rem]" />
+            <span className="sr-only">Back</span>
+          </Button>
           <Link href={"/"}>
             <Button variant="outline" size="icon">
               <Home className="h-[1.4rem] w-[1.4rem]" />
@@ -134,43 +189,75 @@ export default function Header() {
           <CommandDialog
             open={openCommandPalette}
             onOpenChange={setOpenCommandPalette}
+            showCloseButton={false}
+            itemsMap={itemsMap}
           >
-            <CommandInput placeholder="Search projects, blog posts, or commands..." />
+            <CommandInput
+              placeholder="Search projects, blog posts, or commands..."
+              value={searchValue}
+              onValueChange={setSearchValue}
+            />
+            {showFilterHint && (
+              <div className="flex items-center justify-between px-2 py-1 text-sm text-muted-foreground border rounded-sm border-input bg-input/50 mt-2">
+                <span>
+                  Use filters like{" "}
+                  <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">
+                    blog:&lt;title&gt;
+                  </code>{" "}
+                  or{" "}
+                  <code className="font-mono text-xs bg-muted px-1 py-0.5 rounded">
+                    project:&lt;title&gt;
+                  </code>
+                </span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleCloseFilterHint}
+                  className="h-6 w-6"
+                >
+                  <XIcon className="h-4 w-4" />
+                  <span className="sr-only">Close filter hint</span>
+                </Button>
+              </div>
+            )}
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
               {/* Projects Group */}
               <CommandGroup heading="Projects">
-                {projects.map((project) => (
-                  <CommandItem
-                    key={project.id}
-                    onSelect={() => {
-                      console.log(`Navigating to project: ${project.name}`);
-                      setOpenCommandPalette(false);
-                      router.push(project.url);
-                    }}
-                  >
-                    <span>{project.name}</span>
-                  </CommandItem>
-                ))}
+                {(searchValue ? projects : projects.slice(0, 4)).map(
+                  (project) => (
+                    <CommandItem
+                      key={project.id}
+                      onSelect={() => {
+                        console.log(`Navigating to project: ${project.title}`);
+                        setOpenCommandPalette(false);
+                        router.push(project.url);
+                      }}
+                    >
+                      <ProjectIcon className="h-4 w-4" />
+                      <span>{project.title}</span>
+                    </CommandItem>
+                  )
+                )}
               </CommandGroup>
-              <CommandSeparator />
-              {/* Blog Posts Group */}
               <CommandGroup heading="Blog Posts">
-                {blogPosts.map((post) => (
-                  <CommandItem
-                    key={post.id}
-                    onSelect={() => {
-                      console.log(`Navigating to blog post: ${post.title}`);
-                      setOpenCommandPalette(false);
-                      router.push(post.url);
-                    }}
-                  >
-                    <span>{post.title}</span>
-                  </CommandItem>
-                ))}
+                {(searchValue ? blogPosts : blogPosts.slice(0, 4)).map(
+                  (post) => (
+                    <CommandItem
+                      key={post.id}
+                      onSelect={() => {
+                        console.log(`Navigating to blog post: ${post.title}`);
+                        setOpenCommandPalette(false);
+                        router.push(post.url);
+                      }}
+                    >
+                      <BlogIcon className="h-4 w-4" />
+                      <span>{post.title}</span>
+                    </CommandItem>
+                  )
+                )}
               </CommandGroup>
-              <CommandSeparator />
-              <CommandGroup heading="General Commands">
+              {/* <CommandGroup heading="General Commands">
                 <CommandItem
                   onSelect={() => {
                     console.log("Opening Settings");
@@ -188,7 +275,7 @@ export default function Header() {
                 >
                   <span>Toggle Theme</span>
                 </CommandItem>
-              </CommandGroup>
+              </CommandGroup> */}
             </CommandList>
           </CommandDialog>
         </div>
