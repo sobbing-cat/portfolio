@@ -32,12 +32,12 @@ export type BlogPostMetadata = {
 
   // --- Content & Display (Optional) --- //
   mainImage?: string;
-  socialImage?: string;
   category?: string;
   tags?: string[];
   readingTime?: string;
   lastUpdated?: string;
   showToc?: boolean;
+  isInteractive?: boolean;
 
   // --- Promotion & SEO (Optional) --- //
   featured?: boolean;
