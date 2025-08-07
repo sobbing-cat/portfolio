@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "title": "Information",
+    "description": "This file contains information about the portfolio project.",
+    "keywords": ["portfolio", "information", "project details"],
+    "author": "Sobbing_Cat"
+  },
+
+  "footer": {
+    "name": "Sobbing_Cat",
+    "description": "A creative developer focused on building beautiful and functional web experiences.",
+    "links": [
+      "https://www.sobbingcat.com/",
+      "https://www.github.com/sobbing-cat",
+      "https://www.twitch.tv/notsobbingcat",
+      "https://www.youtube.com/@sobbing-cat"
+    ]
+  }
+}
