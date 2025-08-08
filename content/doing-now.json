@@ -1,0 +1,43 @@
+{
+  "title": "Now",
+  "summary": "A snapshot of what I'm focused on these days.",
+  "lastUpdated": "Updated 2025",
+  "currently": [
+    {
+      "title": "Polishing my portfolio",
+      "description": "Iterating on layout, performance, and accessibility.",
+      "tags": ["RSC", "Lighthouse", "A11y"]
+    },
+    {
+      "title": "Prototyping a design system",
+      "description": "Building tokens, theming, and composable components.",
+      "tags": ["TypeScript", "shadcn/ui", "Storybook"]
+    }
+    ],
+  "listening": {
+    "spotifyUrl": "https://open.spotify.com/playlist/5LDSLpVsEfTXByjfHxgoL4?si=790e5398d9d044ff"
+  },
+  "stackUpdates": [
+    {
+      "area": "Next.js App Router",
+      "description": "Leaning into RSC and server actions.",
+      "tags": ["RSC", "Server Actions"]
+    },
+    {
+      "area": "Styling",
+      "description": "Tailwind + shadcn/ui.",
+      "tags": ["Tailwind", "shadcn/ui"]
+    }
+  ],
+  "healthLife": [
+    "Daily walks and stretching breaks to offset screen time.",
+    "Cooking more at home and dialing in a better sleep routine."
+  ],
+  "next": {
+    "goals": [
+      "Ship the first batch of case studies.",
+      "Open-source a small utility from my design system work.",
+      "Write a short note on RSC data patterns."
+    ]
+  }
+}

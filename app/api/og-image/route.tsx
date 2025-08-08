@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
-import SiteData from "@/content/information.json";
+import SiteData from "@/content/site-data.json";
 
 export const runtime = "edge";
 

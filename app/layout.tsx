@@ -7,7 +7,7 @@ import Footer from "@/components/footer";
 import NProgressProvider from "@/providers/nprogress";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ExternalLinkInterceptor } from "@/providers/external-link-interceptor";
-import SiteData from "@/content/information.json";
+import SiteData from "@/content/site-data.json";
 
 const hankedGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",

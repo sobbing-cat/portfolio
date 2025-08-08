@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import type { BlogPostMetadata } from "@/lib/types";
 import { notFound } from "next/navigation";
 import fs from "node:fs";
 import path from "node:path";
-import SiteData from "@/content/information.json";
-import { promises } from "node:dns";
+import SiteData from "@/content/site-data.json";
 
 // Define the expected structure of the MDX module
 interface MDXModule {
@@ -22,7 +21,6 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
 
@@ -38,9 +36,6 @@ export async function generateMetadata(
       description: "The requested blog post could not be found.",
     };
   }
-
-  // Optionally access and extend (rather than replace) parent metadata
-  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: postMetadata.title,

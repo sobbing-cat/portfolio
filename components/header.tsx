@@ -334,9 +334,9 @@ export default function Header() {
               Projects
             </Button>
           </Link>
-          <Link href={"/about-me"}>
+          <Link href={"/now"}>
             <Button variant="link" size="sm" className="text-foreground">
-              About Me
+              Now
             </Button>
           </Link>
         </nav>
