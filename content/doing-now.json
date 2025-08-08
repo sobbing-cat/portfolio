@@ -30,14 +30,12 @@
     }
   ],
   "healthLife": [
-    "Daily walks and stretching breaks to offset screen time.",
-    "Cooking more at home and dialing in a better sleep routine."
+    "Daily walks and stretching breaks to offset screen time."
   ],
   "next": {
     "goals": [
       "Ship the first batch of case studies.",
-      "Open-source a small utility from my design system work.",
-      "Write a short note on RSC data patterns."
+      "Actually finishing my portfolio."
     ]
   }
 }
