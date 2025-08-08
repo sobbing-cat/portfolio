@@ -6,6 +6,7 @@
   },
   "author": {
     "name": "Sobbing Cat",
+    "location": "[REDACTED], Denmark",
     "handle": "Sobbing_Cat",
     "description": "A creative developer focused on building beautiful and functional web experiences.",
     "image": {
@@ -16,7 +17,10 @@
       "https://www.github.com/sobbing-cat",
       "https://www.twitch.tv/notsobbingcat",
       "https://www.youtube.com/@sobbing-cat"
-    ]
+    ],
+    "contactInfo": {
+      "mail": "sobbingcat@kukiku.org"
+    }
   },
   "metadata": {
     "keywords": ["portfolio", "web development", "design", "Sobbing Cat"],
@@ -24,6 +28,17 @@
       "type": "website",
       "image": "/api/og-image",
       "imageAlt": "An overview of the Sobbing Cat portfolio."
+    }
+  },
+  "about": {
+    "description": [
+      "Still working on this.",
+      "Yes I'm actually gonna put something here at some points.",
+      "I just don't know when yet."
+    ],
+    "image": {
+      "url": "http://localhost:3000/_next/image?url=https%3A%2F%2Fplacehold.co%2F600x600%2FEEE%2F31343C&w=828&q=75",
+      "alt": "Lorem Ipsum"
     }
   }
 }
