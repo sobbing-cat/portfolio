@@ -23,7 +23,6 @@ export function SpotifyEmbed({ url, width = "100%", height }: SpotifyEmbedProps)
             return { id, type }
           }
         }
-
         // Handle spotify: URI format
         const uriParts = inputUrl.split(":")
         if (uriParts.length === 3 && uriParts[0] === "spotify") {
@@ -39,16 +38,12 @@ export function SpotifyEmbed({ url, width = "100%", height }: SpotifyEmbedProps)
       }
       return null
     }
-
     const spotifyItem = getSpotifyIdAndTypeFromUrl(url)
-
     if (!spotifyItem) {
       return null // Or return an error message/placeholder
     }
-
     const defaultHeight = spotifyItem.type === "track" ? "152" : "352"
     const finalHeight = height || defaultHeight
-
     return `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/${spotifyItem.type}/${spotifyItem.id}?utm_source=generator" width="${width}" height="${finalHeight}" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
   }, [url, width, height])
 
